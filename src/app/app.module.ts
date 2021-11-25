@@ -11,11 +11,15 @@ import { LoginService } from './services/login.service';
 import { LoginGuard } from './guard/login.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutGuard } from './guard/logout.guard';
+import { Wordcloud } from './components/wordcloud/wordcloud.component';
+import { GameView } from './views/game/game.view';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginView,
+    GameView,
+    Wordcloud
   ],
   imports: [
     BrowserModule,
