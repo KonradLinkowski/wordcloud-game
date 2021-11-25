@@ -1,0 +1,16 @@
+<form [formGroup]="form" (ngSubmit)="form.valid && onSubmit()" class="form">
+  <mat-form-field appearance="outline" class="form-field">
+    <mat-label>Enter your nickname here...</mat-label>
+    <input #input matInput formControlName="username" type="text">
+    <mat-error *ngIf="form.get('username')?.hasError('required')">
+      Username is required
+    </mat-error>
+    <mat-error *ngIf="form.get('username')?.hasError('minlength')">
+      Username is too short
+    </mat-error>
+    <mat-error *ngIf="form.get('username')?.hasError('maxlength')">
+      Username is too long
+    </mat-error>
+  </mat-form-field>
+  <button mat-stroked-button color="primary" class="submit-button">play</button>
+</form>
