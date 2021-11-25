@@ -1,5 +1,5 @@
 {
-  "name": "word-cloud-game",
+  "name": "wordcloud-game",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
