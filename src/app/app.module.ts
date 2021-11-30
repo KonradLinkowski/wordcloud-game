@@ -11,26 +11,32 @@ import { LoginService } from './services/login.service';
 import { LoginGuard } from './guard/login.guard';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LogoutGuard } from './guard/logout.guard';
-import { Wordcloud } from './components/wordcloud/wordcloud.component';
+import { WordcloudComponent } from './components/wordcloud/wordcloud.component';
 import { GameView } from './views/game/game.view';
+import { GameComponent } from './components/game/game.component';
+import { DataService } from './services/data.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginView,
     GameView,
-    Wordcloud
+    GameComponent,
+    WordcloudComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     // Material
     MatButtonModule,
     MatInputModule,
   ],
   providers: [
+    DataService,
     LoginService,
     LoginGuard,
     LogoutGuard,

@@ -1,1 +1,1 @@
-<app-wordcloud></app-wordcloud>
+<app-game *ngIf="(randomGameData | async) as data" [data]="data"></app-game>

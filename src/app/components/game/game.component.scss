@@ -1,0 +1,10 @@
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  .cloud {
+    border: 2px solid black;
+  }
+}

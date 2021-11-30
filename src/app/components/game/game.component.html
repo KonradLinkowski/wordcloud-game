@@ -1,0 +1,12 @@
+<div class="game">
+  <p>{{ data.question }}</p>
+  <app-wordcloud
+    [words]="words"
+    [interactive]="state == GameState.SELECTING"
+    [showTooltips]="state == GameState.CHECKING"
+    (select)="onWordSelect($event)"
+    class="cloud"
+  ></app-wordcloud>
+  <button *ngIf="state == GameState.SELECTING" mat-stroked-button (click)="onCheckAnswers()">check answers</button>
+  <button *ngIf="state == GameState.CHECKING" mat-stroked-button (click)="onFinishGame()">finish game</button>
+</div>
