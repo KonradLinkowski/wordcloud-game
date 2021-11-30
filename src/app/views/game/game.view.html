@@ -1,1 +1,1 @@
-<app-game *ngIf="(randomGameData | async) as data" [data]="data"></app-game>
+<app-game *ngIf="(randomGameData | async) as data" [data]="data" (finish)="onFinish($event)"></app-game>

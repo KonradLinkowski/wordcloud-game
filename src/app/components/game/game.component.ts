@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { GameData } from 'src/app/services/data.service';
 import { Word } from '../wordcloud/wordcloud.component';
 
@@ -14,9 +14,12 @@ export enum GameState {
 })
 export class GameComponent implements OnChanges {
   @Input() data!: GameData;
+  @Output() finish = new EventEmitter<number>();
   words: Word[] = [];
   state = GameState.SELECTING;
   GameState = GameState;
+
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.data) {
@@ -47,10 +50,14 @@ export class GameComponent implements OnChanges {
   }
 
   onFinishGame() {
-
+    const score = this.calcScore();
+    this.finish.emit(score);
   }
 
-  private calcScore() {
-    
+  private calcScore(): number {
+    const correctAnswers = this.words.filter(word => word.selected && this.data.good_words.includes(word.text)).length;
+    const incorrectAnswers = this.words.filter(word => word.selected && !this.data.good_words.includes(word.text)).length;
+    const skippedAnswers = this.words.filter(word => !word.selected && this.data.good_words.includes(word.text)).length;
+    return correctAnswers * 2 - (incorrectAnswers + skippedAnswers);
   }
 }

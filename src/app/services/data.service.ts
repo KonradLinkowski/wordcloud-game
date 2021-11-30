@@ -21,7 +21,6 @@ export class DataService {
       return this.data.asObservable();
     }
     return this.httpClient.get<GameData[]>(this.dataUrl).pipe(
-      tap(d => console.log(d)),
       tap(d => this.data.next(d))
     );
   }

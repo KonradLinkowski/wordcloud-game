@@ -16,6 +16,8 @@ import { GameView } from './views/game/game.view';
 import { GameComponent } from './components/game/game.component';
 import { DataService } from './services/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ScoresService } from './services/scores.service';
+import { ScoresView } from './views/scores/scores.view';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     GameView,
     GameComponent,
     WordcloudComponent,
+    ScoresView,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     DataService,
+    ScoresService,
     LoginService,
     LoginGuard,
     LogoutGuard,

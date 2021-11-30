@@ -1,0 +1,15 @@
+<p>Congratulations, {{ loginService.currentUser | async }}!</p>
+<ng-container *ngIf="(scoresService.scores | async) as scores">
+  <p class="score">
+    <span>Your score:</span>
+    <span>{{ scores.last }} points</span>
+  </p>
+  <p class="score">
+    <span>Your highscore:</span>
+    <span>{{ scores.highscore }} points</span>
+  </p>
+  <p class="score">
+    <span>Your total score:</span>
+    <span>{{ scores.total }} points</span>
+  </p>
+</ng-container>

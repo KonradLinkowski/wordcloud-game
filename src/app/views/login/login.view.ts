@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
-  selector: 'app-login.view',
   templateUrl: './login.view.html',
   styleUrls: ['./login.view.scss']
 })

@@ -4,6 +4,7 @@ import { LoginGuard } from './guard/login.guard';
 import { LogoutGuard } from './guard/logout.guard';
 import { GameView } from './views/game/game.view';
 import { LoginView } from './views/login/login.view';
+import { ScoresView } from './views/scores/scores.view';
 
 const routes: Routes = [{
   path: 'login',
@@ -12,6 +13,10 @@ const routes: Routes = [{
 }, {
   path: '',
   component: GameView,
+  canActivate: [LoginGuard],
+}, {
+  path: 'scores',
+  component: ScoresView,
   canActivate: [LoginGuard],
 }];
 
