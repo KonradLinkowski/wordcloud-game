@@ -12,6 +12,12 @@ export interface Word {
 type SelectableWord = cloud.Word & Word;
 type WordEvent = (e: MouseEvent, word: cloud.Word) => void;
 
+const colors = {
+  selected: 'lightgrey',
+  highlighted: 'grey',
+  normal: 'black',
+};
+
 @Component({
   selector: 'app-wordcloud',
   templateUrl: './wordcloud.component.html',
@@ -31,7 +37,9 @@ export class WordcloudComponent implements AfterViewInit, OnChanges {
   private layout: any;
   private firstDraw = true;
 
-  constructor() {
+  constructor() {}
+
+  ngAfterViewInit(): void {
     this.layout = cloud()
       .size([this.width, this.height])
       .padding(5)
@@ -41,9 +49,6 @@ export class WordcloudComponent implements AfterViewInit, OnChanges {
         this.compiledWords = words;
         this.draw();
       });
-  }
-
-  ngAfterViewInit(): void {
     this.layout.words(this.words.map(word => ({ size: this.fontSize, ...word })))
     this.layout.start();
   }
@@ -78,17 +83,20 @@ export class WordcloudComponent implements AfterViewInit, OnChanges {
       .style('font-family', 'Roboto')
       .attr('text-anchor', 'middle')
       .text(b => b.text!)
-      .attr('fill', w => this.getWordData(w).selected ? 'red' : 'black')
+      .attr('fill', w => this.getWordData(w).selected ? colors.selected : colors.normal)
       .style('user-select', 'none');
     if (this.showTooltips) {
       groups
         .append('text')
+        .style('font-family', 'Roboto')
         .attr('id', d => 't' + d.x + '-' + d.y)
         .attr('x', d => 0)
         .attr('y', d => -d.size! * 0.6)
         .attr('text-anchor', 'middle')
         .attr('fill', w => this.getWordData(w).tooltipColor!)
         .text(w => this.getWordData(w).tooltip || '');
+      texts
+        .attr('fill', w => this.getWordData(w).tooltipColor!);
     }
     if (this.interactive) {
       texts
@@ -104,7 +112,7 @@ export class WordcloudComponent implements AfterViewInit, OnChanges {
   private onClick(event: MouseEvent, word: SelectableWord) {
     word.selected = !word.selected;
     select(event.target as any)
-      .attr('fill', word.selected ? 'red' : 'black');
+      .attr('fill', word.selected ? colors.selected : colors.normal);
     this.select.emit({
       text: word.text!,
       selected: word.selected,
@@ -113,12 +121,12 @@ export class WordcloudComponent implements AfterViewInit, OnChanges {
 
   private onHover(event: MouseEvent, word: SelectableWord) {
     select(event.target as any)
-      .attr('fill', word.selected ? 'orange' : 'yellow');
+      .attr('fill', colors.highlighted);
   }
 
   private onLeave(event: MouseEvent, word: SelectableWord) {
     select(event.target as any)
-      .attr('fill', word.selected ? 'red' : 'black');
+      .attr('fill', word.selected ? colors.selected : colors.normal);
   }
 
   private getWordData(word: cloud.Word): Word {

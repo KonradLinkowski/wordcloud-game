@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginGuard } from './guard/login.guard';
-import { LogoutGuard } from './guard/logout.guard';
+import { LoginGuard } from './guards/login.guard';
+import { LogoutGuard } from './guards/logout.guard';
 import { GameView } from './views/game/game.view';
 import { LoginView } from './views/login/login.view';
 import { ScoresView } from './views/scores/scores.view';

@@ -3,8 +3,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  .question {
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
   
   .cloud {
     border: 2px solid black;
+    margin-bottom: 1rem;
   }
 }

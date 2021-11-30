@@ -1,7 +1,9 @@
 <div class="game">
-  <p>{{ data.question }}</p>
+  <p class="question">{{ data.question | capitalize }}</p>
   <app-wordcloud
     [words]="words"
+    [width]="500"
+    [height]="350"
     [interactive]="state == GameState.SELECTING"
     [showTooltips]="state == GameState.CHECKING"
     (select)="onWordSelect($event)"

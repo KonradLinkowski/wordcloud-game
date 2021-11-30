@@ -37,13 +37,17 @@ export class GameComponent implements OnChanges {
   onCheckAnswers() {
     this.state = GameState.CHECKING;
     this.words = this.words.map(word => {
-      if (!word.selected) {
+      const isGoodWord = this.data.good_words.includes(word.text)
+      const isCorrectAnswer = word.selected && isGoodWord;
+      const isIncorrectAnswer = word.selected && !isGoodWord;
+      const isOmittedAnswer = !word.selected && isGoodWord;
+      if (!isGoodWord && !isIncorrectAnswer && !isOmittedAnswer) {
         return word;
       }
-      const isCorrectAnswer = this.data.good_words.includes(word.text);
+
       return {
         ...word,
-        tooltip: isCorrectAnswer ? 'Good' : 'Bad',
+        tooltip: isCorrectAnswer ? 'Good' : isOmittedAnswer ? 'Omitted' : 'Bad',
         tooltipColor: isCorrectAnswer ? 'green' : 'red',
       };
     })
@@ -57,7 +61,7 @@ export class GameComponent implements OnChanges {
   private calcScore(): number {
     const correctAnswers = this.words.filter(word => word.selected && this.data.good_words.includes(word.text)).length;
     const incorrectAnswers = this.words.filter(word => word.selected && !this.data.good_words.includes(word.text)).length;
-    const skippedAnswers = this.words.filter(word => !word.selected && this.data.good_words.includes(word.text)).length;
-    return correctAnswers * 2 - (incorrectAnswers + skippedAnswers);
+    const omittedAnswers = this.words.filter(word => !word.selected && this.data.good_words.includes(word.text)).length;
+    return correctAnswers * 2 - (incorrectAnswers + omittedAnswers);
   }
 }
