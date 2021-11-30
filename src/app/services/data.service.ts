@@ -11,7 +11,7 @@ export interface GameData {
 
 @Injectable()
 export class DataService {
-  private readonly dataUrl = 'http://localhost:4200/assets/data.json';
+  private readonly dataUrl = `${location.origin}${location.pathname}assets/data.json`;
   private data = new BehaviorSubject<GameData[]>([]);
 
   constructor(private readonly httpClient: HttpClient) {}
