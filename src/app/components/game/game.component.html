@@ -2,8 +2,8 @@
   <p class="question">{{ data.question | capitalize }}</p>
   <app-wordcloud
     [words]="words"
-    [width]="500"
-    [height]="350"
+    [width]="width"
+    [height]="height"
     [interactive]="state == GameState.SELECTING"
     [showTooltips]="state == GameState.CHECKING"
     (select)="onWordSelect($event)"

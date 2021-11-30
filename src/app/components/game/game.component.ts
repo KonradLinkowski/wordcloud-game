@@ -18,6 +18,8 @@ export class GameComponent implements OnChanges {
   words: Word[] = [];
   state = GameState.SELECTING;
   GameState = GameState;
+  height = 350;
+  width = innerHeight > innerWidth ? 300 : 500;
 
   constructor() {}
 

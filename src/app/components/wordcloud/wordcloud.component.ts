@@ -25,7 +25,7 @@ const colors = {
 })
 export class WordcloudComponent implements AfterViewInit, OnChanges {
   @Input() words!: Word[];
-  @Input() fontSize = 50;
+  @Input() fontSize = 35;
   @Input() width = 500;
   @Input() height = 500;
   @Input() interactive = true;
